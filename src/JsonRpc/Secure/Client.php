@@ -5,11 +5,19 @@ namespace JsonRpc\Secure;
 class Client extends \JsonRpc\Client
 {
 
+  private $transport = null;
 
-  public function __construct(array $account, $url, $options = array())
+
+  public function __construct(array $account, $url, array $options = array())
   {
-    $transport = new JsonRpc\Secure\Transport\SecureClient($account, $options);
-    parent::__construct($url, $transport);
+    $this->transport = new Transport\SecureClient($account, $options);
+    parent::__construct($url, $this->transport);
+  }
+
+
+  public function __call($name, $arguments)
+  {
+    call_user_func_array(array($this->transport, $name), $arguments);
   }
 
 
