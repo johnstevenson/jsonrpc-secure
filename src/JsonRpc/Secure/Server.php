@@ -5,16 +5,16 @@ namespace JsonRpc\Secure;
 class Server extends \JsonRpc\Server
 {
 
-  public function __construct($authorize, $handler)
+  public function __construct($methodHandler, $authorizeHandler, array $options = array())
   {
 
-    $authHandler = array(
-      'authorize' => $authorize,
+    $handlers = array(
+      'authorize' => $authorizeHandler,
     );
 
-    $transport = new \AuthKey\Secure\Server($authHandler);
+    $transport = new Transport\SecureServer($handlers, $options);
+    parent::__construct($methodHandler, $transport);
 
-    parent::__construct($handler, $transport);
   }
 
 }
