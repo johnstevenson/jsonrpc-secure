@@ -20,7 +20,7 @@ class SecureClient
   public function send($method, $url, $data, $headers = array())
   {
 
-    if ($headers)
+    if (is_array($headers) && $headers)
     {
       $this->transport->setCurlOption(CURLOPT_HTTPHEADER, $headers);
     }

@@ -15,9 +15,21 @@ class Client extends \JsonRpc\Client
   }
 
 
-  public function __call($name, $arguments)
+  public function setCurlOption($curlOption, $value)
   {
-    call_user_func_array(array($this->transport, $name), $arguments);
+    $this->transport->setCurlOption($curlOption, $value);
+  }
+
+
+  public function setHeader($name, $value)
+  {
+    $this->transport->setHeader($name, $value);
+  }
+
+
+  public function setXHeader($name, $value)
+  {
+    $this->transport->setXHeader($name, $value);
   }
 
 
