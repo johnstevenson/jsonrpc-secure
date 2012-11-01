@@ -25,7 +25,7 @@ class SecureClient
       $this->transport->setCurlOption(CURLOPT_HTTPHEADER, $headers);
     }
 
-    if ($this->transport->send($url, $data))
+    if ($this->transport->send($method, $url, $data))
     {
       $this->output = $this->transport->output;
 
